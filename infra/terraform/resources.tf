@@ -224,7 +224,7 @@ resource "ovh_domain_zone_record" "instance2" {
 # Deploy                                                                           #
 #----------------------------------------------------------------------------------#
 
-resource "null_resource" "export-env" {
+resource "null_resource" "run-ansible-script" {
 
   depends_on = [
     azurerm_linux_virtual_machine.instance1,
@@ -239,31 +239,10 @@ resource "null_resource" "export-env" {
   # infra
 
   provisioner "local-exec" {
-    command = "sed -i -e 's/HUB_URL=.*/HUB_URL=${azurerm_mysql_flexible_server.hub.fqdn}/g' ../.env"
-  }
-  provisioner "local-exec" {
-    command = "sed -i -e 's/HUB_USER=.*/HUB_USER=${azurerm_mysql_flexible_server.hub.administrator_login}/g' ../.env"
-  }
-  provisioner "local-exec" {
-    command = "sed -i -e 's/HUB_PASSWORD=.*/HUB_PASSWORD=${azurerm_mysql_flexible_server.hub.administrator_password}/g' ../.env"
-  }
-  provisioner "local-exec" {
     command = "sed -i '5 s/.*/${azurerm_public_ip.publicip_instance1.ip_address}/g'  ../ansible/hosts"
   }
   provisioner "local-exec" {
     command = "sed -i '6 s/.*/${azurerm_public_ip.publicip_instance2.ip_address}/g'  ../ansible/hosts"
-  }
-  provisioner "local-exec" {
-    command = "sed -i -e 's/INSTANCE1_URL=.*/INSTANCE1_URL=${ovh_domain_zone_record.instance1.subdomain}.${ovh_domain_zone_record.instance1.zone}/g' ../.env"
-  }
-  provisioner "local-exec" {
-    command = "sed -i -e 's/INSTANCE1_IP=.*/INSTANCE1_IP=${azurerm_public_ip.publicip_instance1.ip_address}/g'  ../.env"
-  }
-  provisioner "local-exec" {
-    command = "sed -i -e 's/INSTANCE2_URL=.*/INSTANCE2_URL=${ovh_domain_zone_record.instance2.subdomain}.${ovh_domain_zone_record.instance2.zone}/g' ../.env"
-  }
-  provisioner "local-exec" {
-    command = "sed -i -e 's/INSTANCE2_IP=.*/INSTANCE2_IP=${azurerm_public_ip.publicip_instance2.ip_address}/g'  ../.env"
   }
 
   # run

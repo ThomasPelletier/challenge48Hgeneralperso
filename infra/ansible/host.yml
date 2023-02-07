@@ -79,19 +79,39 @@
         mode: '0755'
         owner: adminuser
 
-    - name: "[Install] Copy the back directory"
-      become: true
-      ansible.builtin.copy:
-        src: ../../
-        dest: /home/adminuser/Challenge48h/
-        owner: adminuser
+    - name: "[Install] Clean the local directory"
+      ansible.builtin.file:
+        path: ~/repo
+        state: absent
 
-    - name: "[Install] Copy the front directory"
-      become: true
+    - name: "[Install] Clone the repository"
+      git:
+        repo: https://github.com/NuRoZ123/challenge48Hgeneral.git
+        dest: ~/repo
+        clone: yes
+      tags:
+        - temp
+
+    - name: "[Install] Create infra env file"
       ansible.builtin.copy:
-        src: ../../../challenge48hFront/
-        dest: /home/adminuser/challenge48hFront/
+        src: ../.secret
+        dest: ~/repo/infra/.secret
         owner: adminuser
+        mode: '0600'
+
+    - name: "[Install] Create front env file"
+      ansible.builtin.copy:
+        src: ./src/.envfront
+        dest: ~/repo/front/.env
+        owner: adminuser
+        mode: '0600'
+
+    - name: "[Install] Create back env file"
+      ansible.builtin.copy:
+        src: ./src/.envback
+        dest: ~/repo/back/.env
+        owner: adminuser
+        mode: '0600'
 
     - name: "[Config] Set variables"
       shell: |
@@ -99,26 +119,20 @@
         sed -i -e 's/VUE_APP_IP_API=.*/VUE_APP_IP_API='$IP'/g' ../../challenge48hFront/.env"
         sed -i -e 's/ip=.*/ip='$IP'/g' ../../Challenge48h/.env"
       args:
-        chdir: ~/Challenge48h/docker
+        chdir: ~/repo/infra/docker
       register: certbot
       failed_when: certbot.rc == -1
-      tags:
-        - temp
 
     - name: "[Run] Run certbot script"
       shell: |
         chmod +x ./certbot.sh && ./certbot.sh
       args:
-        chdir: ~/Challenge48h/docker
+        chdir: ~/repo/infra/docker
       register: certbot
       failed_when: certbot.rc == -1
-      tags:
-        - temp
 
     - name: "[Run] Start containers"
       shell: |
         docker compose down ; docker compose up -d
       args:
-        chdir: ~/Challenge48h/infrastructure/docker
-      tags:
-        - temp
+        chdir: ~/repo/infra/docker
