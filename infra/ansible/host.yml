@@ -154,8 +154,9 @@
 
     - name: "[MySQL] MySQL setup script"
       shell: |
-        sleep 15 && mysql -u admin -h 127.0.0.1 -piamthepassword < ./setupInstance.sql
+        sleep 30 && mysql -u admin -h 127.0.0.1 -piamthepassword < ./setupInstance.sql
       args:
         chdir: ~/repo/mysql
       tags:
+        - temp
         - db
