@@ -13,6 +13,8 @@ services:
     container_name: back
     env_file:
       - /home/adminuser/repo/back/.env
+    links:
+      - mysql
 
   mysql:
     container_name: mysql
