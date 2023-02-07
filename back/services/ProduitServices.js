@@ -2,11 +2,12 @@ import {database} from "../db/initDb.js";
 
 export const ProduitServices = {
     getAll: async () => {
-        let connexion = database.createConnexionInstance();
+        let connexion = await database.createConnexionInstance();
         let sql = `select * from Produit`;
-        let response = await connexion.awaitQuery(sql);
+        const [rows, fields] = await connexion.query('SELECT * FROM Produit');
         database.closeConnexion(connexion);
-        return response;
+        return rows;
+        // return response;
     },
     getAllByMarchand: async (marchandId) => {
         let connexion = database.createConnexionInstance();
