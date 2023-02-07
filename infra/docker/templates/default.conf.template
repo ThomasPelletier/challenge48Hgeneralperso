@@ -1,5 +1,5 @@
 upstream front{
-    server front;
+    server front:8080;
 }
 
 upstream back{
