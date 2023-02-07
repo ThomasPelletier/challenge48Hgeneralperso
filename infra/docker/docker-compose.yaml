@@ -29,6 +29,9 @@ services:
       - MYSQL_PASSWORD=iamthepassword
     env_file:
       - ../ansible/src/.envback
+    ports:
+      - "127.0.0.1:3306:3306"
+
 
   nginx:
     container_name: nginx
