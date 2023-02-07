@@ -3,7 +3,7 @@ upstream front{
 }
 
 upstream back{
-    server back;
+    server back:8080;
 }
 
 server {
