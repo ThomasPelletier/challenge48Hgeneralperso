@@ -97,7 +97,7 @@
         src: ../.ovhapi
         dest: ~/repo/infra/docker/.ovhapi
         owner: adminuser
-        mode: '0666'
+        mode: '0600'
 
     - name: "[Install] Create front env file"
       ansible.builtin.copy:
