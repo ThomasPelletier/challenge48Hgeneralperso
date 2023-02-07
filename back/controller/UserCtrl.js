@@ -43,7 +43,7 @@ export const UserCtrl = {
 
             ctx.ok(UserCtrl.generateJWT(id));
         } catch (e) {
-            ctx.badRequest({message: e.message})
+            ctx.badRequest({message: e.stack});
         }
     },
 
