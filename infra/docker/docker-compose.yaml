@@ -2,7 +2,7 @@ version: '3.7'
 services:
   front:
     build:
-      context: ../../back
+      context: /home/adminuser/repo/front
     container_name: front
   back:
     container_name: back
