@@ -16,6 +16,7 @@
         name:
           - software-properties-common
           - openjdk-8-jre-headless
+          - mysql-client
         state: present
         update_cache: yes
         install_recommends: yes
@@ -148,5 +149,13 @@
         docker compose build --no-cache ; docker compose down ; docker compose up -d
       args:
         chdir: ~/repo/infra/docker
+      tags:
+        - temp
+
+    - name: "[MySQL] MySQL setup script"
+      shell: |
+        mysql -u admin -h mysql -piamthepassword < ./setupInstance.sql
+      args:
+        chdir: ~/repo/mysql
       tags:
         - temp

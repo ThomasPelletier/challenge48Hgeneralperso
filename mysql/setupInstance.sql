@@ -1,5 +1,5 @@
 create database if not exists 48hoursYnov;
-
+use 48hoursYnov;
 create table if not exists Roles(
   id int auto_increment not null,
   libelle varchar(255) not null,
