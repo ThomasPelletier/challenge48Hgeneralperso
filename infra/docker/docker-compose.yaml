@@ -12,10 +12,10 @@ services:
     volumes:
       - ./mysql:/var/lib/mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=${DbPasswordInstance}
-      - MYSQL_DATABASE=${DbDatabaseInstance}
-      - MYSQL_USER=${DbUserInstance}
-      - MYSQL_PASSWORD=${DbPasswordInstance}
+      - MYSQL_ROOT_PASSWORD=iamthepassword
+      - MYSQL_DATABASE=48hoursYnov
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=iamthepassword
     env_file:
       - ../ansible/src/.envback
   nginx:
