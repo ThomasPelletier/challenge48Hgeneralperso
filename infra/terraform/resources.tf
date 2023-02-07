@@ -108,7 +108,32 @@ resource "azurerm_mysql_flexible_server_firewall_rule" "hub" {
   resource_group_name = azurerm_resource_group.rg.name
   server_name         = azurerm_mysql_flexible_server.hub.name
   start_ip_address    = "0.0.0.0"
-  end_ip_address      = "0.0.0.0"
+  end_ip_address      = "255.255.255.255"
+}
+
+resource "azurerm_mysql_flexible_server_configuration" "require_secure_transport" {
+  name                = "require_secure_transport"
+  resource_group_name = azurerm_resource_group.rg.name
+  server_name         = azurerm_mysql_flexible_server.hub.name
+  value               = "OFF"
+}
+
+resource "null_resource" "create-database-script" {
+
+  depends_on = [
+    azurerm_mysql_flexible_server.hub,
+    azurerm_mysql_flexible_server_firewall_rule.hub,
+    azurerm_mysql_flexible_server_configuration.require_secure_transport
+  ]
+  
+  triggers = {
+    always_run = "${timestamp()}"
+  }
+
+  provisioner "local-exec" {
+    command     = "mysql -u ${azurerm_mysql_flexible_server.hub.administrator_login} -h ${azurerm_mysql_flexible_server.hub.fqdn} -p'${azurerm_mysql_flexible_server.hub.administrator_password}' < ../../mysql/setupHub.sql"
+  }
+
 }
 
 #----------------------------------------------------------------------------------#
