@@ -11,6 +11,11 @@ services:
     image: mysql:8.0-debian
     volumes:
       - ./mysql:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DbPasswordInstance}
+      - MYSQL_DATABASE=${DbDatabaseInstance}
+      - MYSQL_USER=${DbUserInstance}
+      - MYSQL_PASSWORD=${DbPasswordInstance}
   nginx:
     container_name: nginx
     image: nginx:1.23.3
