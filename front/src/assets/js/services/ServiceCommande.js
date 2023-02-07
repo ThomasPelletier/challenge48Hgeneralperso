@@ -8,7 +8,7 @@ export const ServiceCommande = {
 
         let newProduits = [];
         for(let produit of lesProduits) {
-            newProduits.push({idProduit: produit.id, idInstance: produit.marchand.instance.id, qte: produit.qte});
+            newProduits.push({idProduit: produit.id, idInstance: produit.marchand.instance.id});
         }
 
         let info = await (await ServiceUtilisateur.getInfo()).json();
