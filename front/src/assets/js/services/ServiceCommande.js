@@ -15,7 +15,7 @@ export const ServiceCommande = {
 
         for(let host of await hosts.json()) {
             const data = JSON.stringify({utilisateur: info.utilisateur, produits: newProduits});
-            await ServiceXhr.callWithoutAuth(`http://${host.ip}:${process.env.VUE_APP_PORT_API}/api/commandes/save`, data, "POST");
+            await ServiceXhr.callWithoutAuth(`https://${host.ip}:${process.env.VUE_APP_PORT_API}/api/commandes/save`, data, "POST");
         }
 
     }
