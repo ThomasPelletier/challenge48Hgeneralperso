@@ -1,9 +1,9 @@
 upstream front{
-    server front:8080;
+    server front;
 }
 
 upstream back{
-    server back:8080;
+    server back;
 }
 
 server {
