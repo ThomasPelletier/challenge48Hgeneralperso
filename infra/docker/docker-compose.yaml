@@ -6,8 +6,6 @@ services:
     container_name: front
     env_file:
       - /home/adminuser/repo/front/.env
-    ports:
-      - "8080:80"
   back:
     container_name: back
     image: httpd
@@ -23,15 +21,15 @@ services:
       - MYSQL_PASSWORD=iamthepassword
     env_file:
       - ../ansible/src/.envback
-  # nginx:
-  #   container_name: nginx
-  #   image: nginx:1.23.3
-  #   links:
-  #     - front
-  #     - back
-  #   ports:
-  #     - "80:80"
-  #     - "443:443"
-  #   volumes:
-  #     - /etc/letsencrypt:/etc/letsencrypt
-  #     - ./templates:/etc/nginx/templates
+  nginx:
+    container_name: nginx
+    image: nginx:1.23.3
+    links:
+      - front
+      - back
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt
+      - ./templates:/etc/nginx/templates
