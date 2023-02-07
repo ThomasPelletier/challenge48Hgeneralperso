@@ -17,9 +17,9 @@ export const UserServices = {
       return response.length  >= 1;
     },
 
-    register: async (email, password) => {
+    register: async (email, password, idRole) => {
         let connexion = database.createConnexionInstance();
-        let sql = `insert into Utilisateurs(email, password, idRole) values ("${email}", "${password}",  1);`;
+        let sql = `insert into Utilisateurs(email, password, idRole) values ("${email}", "${password}",  ${idRole});`;
         await connexion.awaitQuery(sql);
         database.closeConnexion(connexion);
         return await UserServices.lastIdUtilisateurs()

@@ -1,6 +1,6 @@
 import Joi from "joi";
 import {HubServices} from "../services/HubServices.js";
-import {CommandeService} from "../services/CommandeService.js";
+import {CommandeServices} from "../services/CommandeServices.js";
 
 export const CommandeCtrl = {
     save: async (ctx) => {
@@ -9,7 +9,8 @@ export const CommandeCtrl = {
                 produits: Joi.array().items(
                     Joi.object({
                         idProduit: Joi.number().required(),
-                        idInstance: Joi.number().required()
+                        idInstance: Joi.number().required(),
+                        qte: Joi.number().required()
                     })
                 ).required(),
                 utilisateur: Joi.object({
@@ -28,8 +29,8 @@ export const CommandeCtrl = {
             let produits = params.produits.filter(produit => produit.idInstance === currentIdInstance);
 
             if(produits.length > 0) {
-                let commandeId = await CommandeService.createCommande(params.utilisateur.id, params.utilisateur.instance);
-                await CommandeService.addProduitsToCommande(produits, commandeId);
+                let commandeId = await CommandeServices.createCommande(params.utilisateur.id, params.utilisateur.instance);
+                await CommandeServices.addProduitsToCommande(produits, commandeId);
             }
 
             ctx.noContent();
