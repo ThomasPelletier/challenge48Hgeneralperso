@@ -32,7 +32,6 @@ services:
     ports:
       - "127.0.0.1:3306:3306"
 
-
   nginx:
     container_name: nginx
     image: nginx:1.23.3
