@@ -16,6 +16,13 @@
       <li><a href="#technolgies">Technolgies utilisées</a></li>
     </li>
     <li>
+        <a href="#dévelopement">développement</a>
+        <ul>
+            <li><a href="#prérequis">Prérequis</a></li>
+        <li><a href="#installation">Installation</a></li>
+        </ul>
+    </li>
+    <li>
       <a href="#déploiement">Déploiement</a>
       <ul>
         <li><a href="#prérequis">Prérequis</a></li>
@@ -79,10 +86,45 @@ En plus de cela l'utilisation de Terraform nous permet de faire la création de 
 * [<img height="50" src="https://user-images.githubusercontent.com/25181517/183898674-75a4a1b1-f960-4ea9-abcb-637170a00a75.png">](https://www.w3.org/Style/CSS/Overview.en.html)
 * [<img height="50" src="https://user-images.githubusercontent.com/25181517/202896760-337261ed-ee92-4979-84c4-d4b829c7355d.png">](https://tailwindcss.com/)
 * [Ansible](https://www.ansible.com/)
+* [Koa](https://koajs.com/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+<!-- Développement -->
+## Développement
 
+### Prérequis
+Vous devez au préalable avoir : <br>
+<ul>
+    <li>ide</li>
+    <li>node js</li>
+</ul>
+
+### Installation et demarrage
+1: cloner le repo:
+```
+ https://github.com/NuRoZ123/challenge48Hgeneral.git
+```
+
+2: en invite de commande allez de le dossier "back":
+```
+ cd back
+```
+
+3: executé le fichier index.js pour lancer l'api (backend)
+```
+ node -r dotenv/config index.js
+```
+
+4: allez maintenant avec un autre terminal dans le dossier "front":
+```
+ cd front
+```
+
+5: executé la commande suivante pour lancer vueJS (frontend)
+```
+ npm run serve
+```
 
 <!-- Déploiement -->
 ## Déploiement
@@ -153,13 +195,18 @@ ansible-playbook host.yml -i ./hosts -v
 <!-- ROADMAP -->
 ## Roadmap
 
-- [x]Déploiement Infrastructure réseau
-- [x]Docker container NodeJS Vue + MySql
-- [x]Affichage du site
-- [x]Base de données
-- [x]Présentation des produits des instances
-- [x]Création de comptes clients et commercants 
-- [ ]Paiement fonctionnel
+- [x]Déploiement Infrastructure réseau <br>
+- [x]Docker container NodeJS Vue + MySql <br>
+- [x]Affichage du site <br>
+- [x]Conception de la base de données <br>
+- [x]Présentation des produits des instances <br>
+- [x]Création de comptes clients et commercants <br>
+- [x]Création d'une api liée au hub et a une instance précise <br>
+- [x]Création d'une vue pouvant appeler les api des instances <br>
+- [x]Un invité peut se connecté ou s'enregistré (client ou marchand) sur une instances <br>
+- [x]Un Utilisateur peut consulter les commercants de toutes les instance <br>
+- [x]Un Utilisateur peut commander des produits de plusieurs instance <br>
+- [ ]Paiement fonctionnel <br>
 - [ ]Envoi d'emails de confirmation
 
 
