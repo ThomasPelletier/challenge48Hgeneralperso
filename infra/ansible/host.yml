@@ -94,8 +94,8 @@
 
     - name: "[Install] Create infra env file"
       ansible.builtin.copy:
-        src: ../.secret
-        dest: ~/repo/infra/.secret
+        src: ../.ovhapi
+        dest: /tmp/.ovhapi
         owner: adminuser
         mode: '0600'
 
