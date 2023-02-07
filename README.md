@@ -12,7 +12,6 @@
       <ul>
         <li><a href="#problématique">Problématique</a></li>
         <li><a href="#solution">Solution proposée</a></li>
-         <li><a href="#réfléxion">Axe de réfléxion</a></li>
       </ul>
       <li><a href="#technolgies">Technolgies utilisées</a></li>
     </li>
@@ -53,10 +52,10 @@ décentralisés, tout en conservant leur indépendance de manière à ne pas dé
 
 
 
-Afin de développer une boutique en ligne adaptée aux besoins des clients et commercants et creer un réseau décentralisé nous avons determiné que nous avions besoin  : <br>
+Afin de développer une boutique en ligne adaptée aux besoins des clients et commercants et créer un réseau décentralisé nous avons determiné que nous avions besoin  : <br>
 <br>
 D'un Hub avec une base de donnée qui contient la liste de toute les instances <br>
-De multiples instances capable de communiquer entre elles ainsi qu'avec le hub   <br>
+De multiples instances capable de communiquer entre elles (NodeJS API) ainsi qu'avec le hub   <br>
 <br>
 Chacune des instances utilise un fichier Docker avec plusieurs contenaires (NodeJS , Vue et MySQL) qui nous permet de faire tourner notre front-end(Vue app) et notre back-end(Node API, MySQL)<br>
 En plus de cela l'utilisation de Terraform nous permet de faire la création de notre infrastructure réseau tandis que Ansible vas assurer le déploiement ainsi que l'automatisation de celle-ci  
@@ -65,7 +64,6 @@ En plus de cela l'utilisation de Terraform nous permet de faire la création de 
 
 <br>
 
-### Réflexion 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
