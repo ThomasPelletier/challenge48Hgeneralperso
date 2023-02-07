@@ -4,4 +4,4 @@ RUN npm i
 COPY package.json .
 COPY . .
 EXPOSE 5173
-CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "serve"]

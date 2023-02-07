@@ -80,6 +80,7 @@
         owner: adminuser
 
     - name: "[Install] Clean the local directory"
+      become: true
       ansible.builtin.file:
         path: ~/repo
         state: absent
