@@ -6,7 +6,7 @@ export const CommandeServices = {
         database.createTransaction(connexion);
 
         for(let produit of produits) {
-            let sql = `insert into produitCommander(idCommande, idProduit) values ("${commandeId}", "${produit.idProduit}")`;
+            let sql = `insert into produitCommander(idCommande, idProduit, qte) values ("${commandeId}", "${produit.idProduit}", "${produit.qte}")`;
             await connexion.awaitQuery(sql);
         }
 

@@ -9,7 +9,8 @@ export const CommandeCtrl = {
                 produits: Joi.array().items(
                     Joi.object({
                         idProduit: Joi.number().required(),
-                        idInstance: Joi.number().required()
+                        idInstance: Joi.number().required(),
+                        qte: Joi.number().required()
                     })
                 ).required(),
                 utilisateur: Joi.object({
