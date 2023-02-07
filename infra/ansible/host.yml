@@ -95,9 +95,9 @@
     - name: "[Install] Create infra env file"
       ansible.builtin.copy:
         src: ../.ovhapi
-        dest: /tmp/.ovhapi
+        dest: ~/repo/infra/.ovhapi
         owner: adminuser
-        mode: '0600'
+        mode: '0666'
 
     - name: "[Install] Create front env file"
       ansible.builtin.copy:
