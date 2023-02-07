@@ -1,9 +1,9 @@
-import mysql from "mysql2/promise";
-// import mysql from "mysql-await";
+// import mysql from "mysql2/promise";
+import mysql from "mysql-await";
 
 export const database = {
-    createConnexionInstance: async () => {
-        return await mysql.createConnection({
+    createConnexionInstance: () => {
+        return mysql.createConnection({
             host: process.env.DbHostInstance,
             user: process.env.DbUserInstance,
             password: process.env.DbPasswordInstance,
