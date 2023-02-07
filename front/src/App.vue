@@ -1,49 +1,53 @@
 <template>
-  <h1 class="text-3xl font-bold underline">test</h1>
-  <AuthComponent v-if="page === 'auth'" @changePage="changePage"/>
+  <NavComponent :isConnected="isConnected" @changePage="changePage" @setIsConnected="setIsConnected"/>
+  <AuthComponent v-if="page === 'auth'" @changePage="changePage" @setIsConnected="setIsConnected"/>
   <ShopComponent v-else-if="page === 'shop'" @addToCart="addToCart" @changePage="changePage"/>
-  <div v-else>
-    <button v-on:click="changePage('shop')">Liste de produit</button>
-    <button v-on:click="commander">commander</button>
+  <CartComponent v-else-if="page === 'cart'" :panier="panier" @changePage="changePage" @clearPanier="clearPanier" @removeToCart="removeToCart"/>
 
-    <div v-for="produit in panier" :key="produit">
-      <ProduitComponent :produit="produit" :showAAP="false"/>
-    </div>
-
-    <span class="error">{{error}}</span>
-    <span class="msg">{{msg}}</span>
-  </div>
+  <span class="error">{{error}}</span>
+  <span class="msg">{{msg}}</span>
 </template>
 
 <script>
 import AuthComponent from "./components/AuthComponent";
 import ShopComponent from "./components/ShopComponent";
-import ProduitComponent from "./components/ProduitComponent";
-import {ServiceCommande} from "./assets/js/services/ServiceCommande";
+import NavComponent from "./components/NavComponent";
+import CartComponent from "./components/CartComponent";
 
 export default {
   name: 'App',
   components: {
+    NavComponent,
     AuthComponent,
     ShopComponent,
-    ProduitComponent
+    CartComponent
   },
   data: () => ({
     page: localStorage.getItem("token") != null ? "shop" : "auth",
     panier: [],
     error: "",
-    msg: ""
+    msg: "",
+    isConnected: localStorage.getItem("token") !== null,
   }),
 
   methods: {
     changePage(value) {
       this.page = value;
     },
-    commander() {
-      ServiceCommande.save(this.panier);
-    },
     addToCart(produit) {
-      this.panier.push(produit);
+      let indexOfProduit = this.panier.findIndex((element) => element.id === produit.id && element.marchand.instance.id === produit.marchand.instance.id) 
+      if(indexOfProduit === -1) {
+        this.panier.push(produit);
+      }
+    },
+    setIsConnected(value) {
+      this.isConnected = value;
+    },
+    clearPanier() {
+      this.panier = [];
+    },
+    removeToCart(indexProduit) {
+      this.panier.splice(indexProduit, 1);
     }
   },
 }
@@ -51,13 +55,21 @@ export default {
 
 <style>
 
-/*@tailwind base;*/
-/*@tailwind components;*/
-/*@tailwind utilities;*/
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-body {
-  background-color: black;
-  color: white;
+html, body {
+  background-color: #808080;
+  margin:0;
+  padding:0;
+  height:100%;
+}
+
+.header {
+  background-color: #ffc72c;
+  padding: 10px;
+  text-align: center;
 }
 
 .error {

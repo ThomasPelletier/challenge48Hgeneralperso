@@ -1,15 +1,19 @@
 <template>
-  <button v-on:click="moveToPanier">Mon panier</button>
-  <select v-model="marchandSelected">
-    <option v-for="marchand of marchands" v-bind:value="marchand" v-bind:key="marchand">
-      {{ marchand.nom }}
-    </option>
-  </select>
-  <button v-on:click="changeCard">choisir ce commercant</button>
+	<div class="flex flex-col">
+		<div class="w-full  h-full flex flex-col space-y-4 justify-center">
+			<button class="rounded-xl mx-[40%] p-4 bg-[#ffc72c]" v-on:click="moveToPanier">Mon panier</button>
+			<select class="mx-[40%] rounded-xl" v-model="marchandSelected">
+				<option  v-for="marchand of marchands" v-bind:value="marchand" v-bind:key="marchand">
+				{{ marchand.nom }}
+				</option>
+			</select>
+			<button class="rounded-xl p-4 bg-[#ffc72c] mx-[40%]" v-on:click="changeCard">Choisir ce commercant</button>
 
-  <div v-for="produit in produits" :key="produit">
-    <ProduitComponent :produit="produit" :showAAP="true" @addToPanier="addToPanier"/>
-  </div>
+			<div v-for="produit in produits" :key="produit">
+				<ProduitComponent :produit="produit" :showAAP="true" @addToPanier="addToPanier"/>
+			</div>		
+		</div>
+	</div>
 </template>
 
 <script>
@@ -47,5 +51,10 @@ export default {
 </script>
 
 <style scoped>
+
+div{
+  margin-top: 2em;
+  justify-content: space-between;
+}
 
 </style>
