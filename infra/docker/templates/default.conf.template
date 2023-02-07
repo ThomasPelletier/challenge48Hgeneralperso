@@ -13,7 +13,7 @@ server {
     server_name                  *.adminadmin.fr;
 
     location / {
-        proxy_pass http://front:8080;
+        proxy_pass http://front;
     }
 
     location /api {
