@@ -1,5 +1,5 @@
 upstream front{
-    server front:8080;
+    server front:5173;
 }
 
 upstream back{
@@ -13,7 +13,7 @@ server {
     server_name                  *.adminadmin.fr;
 
     location / {
-        proxy_pass http://front/;
+        proxy_pass http://front:5173;
     }
 
     location /api {

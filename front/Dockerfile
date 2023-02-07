@@ -1,12 +1,7 @@
-FROM node:18.12.1 as build-stage
-RUN npm install -g http-server
+FROM node:18.12.1
 WORKDIR /app
-COPY package.json .
 RUN npm i
+COPY package.json .
 COPY . .
-RUN npm run build
-
-FROM nginx:stable-alpine as production-stage
-COPY --from=build-stage /app/dist /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+EXPOSE 5173
+CMD ["npm", "run", "serve"]
