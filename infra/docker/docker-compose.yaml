@@ -4,6 +4,8 @@ services:
     build:
       context: /home/adminuser/repo/front
     container_name: front
+    env_file:
+      - /home/adminuser/repo/front/.env
   back:
     container_name: back
     image: httpd
