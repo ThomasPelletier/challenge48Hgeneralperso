@@ -21,7 +21,8 @@
         install_recommends: yes
 
     - name : "[Node] Check node"
-      shell: "node -v"
+      shell: |
+        node -v
       args:
         executable: /bin/bash
       register: node_installed
@@ -29,15 +30,18 @@
       changed_when: node_installed.rc == -1
 
     - name:  "[Node] Download and install NVM"
-      shell: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+      shell: |
+        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
       when: node_installed.rc != 0
 
     - name: "[Node] Make the nvm bash script executable"
-      shell: chmod +x ~/.nvm/nvm.sh
+      shell: |
+        chmod +x ~/.nvm/nvm.sh
       when: node_installed.rc != 0
 
     - name: "[Node] Install Node Versions"
-      shell: "source ~/.nvm/nvm.sh && nvm install 16.16.0"
+      shell: |
+        source ~/.nvm/nvm.sh && nvm install 16.16.0
       args:
         executable: /bin/bash
       when: node_installed.rc != 0
@@ -67,14 +71,20 @@
         name: adminuser
         group: docker
 
+    - name: "[Install] Crate Mysql directory"
+      become: true
+      ansible.builtin.file:
+        path: /mysql
+        state: directory
+        mode: '0755'
+        owner: adminuser
+
     - name: "[Install] Copy the back directory"
       become: true
       ansible.builtin.copy:
-        src: ../
+        src: ../../
         dest: /home/adminuser/Challenge48h/
         owner: adminuser
-      tags:
-        - temp
 
     - name: "[Install] Copy the front directory"
       become: true
@@ -82,21 +92,33 @@
         src: ../../../challenge48hFront/
         dest: /home/adminuser/challenge48hFront/
         owner: adminuser
+
+    - name: "[Config] Set variables"
+      shell: |
+        IP=$(curl -4 icanhazip.com)
+        sed -i -e 's/VUE_APP_IP_API=.*/VUE_APP_IP_API='$IP'/g' ../../challenge48hFront/.env"
+        sed -i -e 's/ip=.*/ip='$IP'/g' ../../Challenge48h/.env"
+      args:
+        chdir: ~/Challenge48h/docker
+      register: certbot
+      failed_when: certbot.rc == -1
       tags:
         - temp
 
     - name: "[Run] Run certbot script"
-      shell: "chmod +x ./certbot.sh && ./certbot.sh"
+      shell: |
+        chmod +x ./certbot.sh && ./certbot.sh
       args:
-        chdir: ~/repo/docker
+        chdir: ~/Challenge48h/docker
       register: certbot
       failed_when: certbot.rc == -1
       tags:
         - temp
 
     - name: "[Run] Start containers"
-      shell: "docker compose down ; docker compose up -d"
+      shell: |
+        docker compose down ; docker compose up -d
       args:
-        chdir: ~/repo/docker
+        chdir: ~/Challenge48h/infrastructure/docker
       tags:
         - temp

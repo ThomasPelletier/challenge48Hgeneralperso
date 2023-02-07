@@ -6,13 +6,13 @@ services:
   back:
     container_name: back
     image: httpd
-  postgres:
-    container_name: postgres
-    image: postgres:15.1
+  mysql:
+    container_name: mysql
+    image: mysql:8.0-debian
     env_file:
       - ../.env
     volumes:
-      - ./postgres:/var/lib/postgresql/data
+      - ./mysql:/var/lib/mysql
   nginx:
     container_name: nginx
     image: nginx:1.23.3

@@ -3,21 +3,21 @@ upstream front{
 }
 
 upstream back{
-    server back:80;
+    server back:8080;
 }
 
 server {
     listen                       443 ssl;
-    ssl_certificate              /etc/letsencrypt/live/${INSTANCE1_URL}/cert.pem;
-    ssl_certificate_key          /etc/letsencrypt/live/${INSTANCE1_URL}/privkey.pem;
-    server_name                  ${URL};
+    ssl_certificate              /etc/letsencrypt/live/adminadmin.fr/cert.pem;
+    ssl_certificate_key          /etc/letsencrypt/live/adminadmin.fr/privkey.pem;
+    server_name                  *.adminadmin.fr;
 
     location / {
         proxy_pass http://front/;
     }
 
     location /api {
-        proxy_pass http://back/;
+        proxy_pass http://back;
     }
 
 }

@@ -100,6 +100,7 @@ resource "azurerm_mysql_flexible_server" "hub" {
   backup_retention_days  = 1
   sku_name               = "B_Standard_B2s"
   version                = "8.0.21"
+  zone                   = 1
 }
 
 resource "azurerm_mysql_flexible_server_firewall_rule" "hub" {
