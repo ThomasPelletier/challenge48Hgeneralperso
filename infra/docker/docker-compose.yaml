@@ -16,6 +16,8 @@ services:
       - MYSQL_DATABASE=${DbDatabaseInstance}
       - MYSQL_USER=${DbUserInstance}
       - MYSQL_PASSWORD=${DbPasswordInstance}
+    env_file:
+      - ../ansible/src/.envback
   nginx:
     container_name: nginx
     image: nginx:1.23.3
