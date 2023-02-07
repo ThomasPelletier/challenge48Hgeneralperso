@@ -126,7 +126,7 @@
       shell: |
         IP=$(curl -4 icanhazip.com)
         sed -i -e 's/VUE_APP_IP_API=.*/VUE_APP_IP_API='$IP'/g' ~/repo/front/.env"
-        sed -i -e 's/ip=.*/ip='$IP'/g' ~/repo/front/.env"
+        sed -i -e 's/ip=.*/ip='$IP'/g' ~/repo/back/.env"
       args:
         chdir: ~/repo/infra/docker
       register: certbot
@@ -146,7 +146,7 @@
 
     - name: "[Run] Start containers"
       shell: |
-        docker compose down ; docker compose up -d
+        docker compose down ;  docker compose build --no-cache ; docker compose up -d
       args:
         chdir: ~/repo/infra/docker
       tags:
