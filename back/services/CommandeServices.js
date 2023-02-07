@@ -1,6 +1,6 @@
 import {database} from "../db/initDb.js";
 
-export const CommandeService = {
+export const CommandeServices = {
     addProduitsToCommande: async (produits, commandeId) => {
         let connexion = database.createConnexionInstance();
         database.createTransaction(connexion);
@@ -27,6 +27,6 @@ export const CommandeService = {
         let sql = `insert into Commande(idUtilisateur, idInstance) values ("${idUser}", "${idInstance}")`;
         await connexion.awaitQuery(sql);
         database.closeConnexion(connexion);
-        return await CommandeService.lastIdCommande();
+        return await CommandeServices.lastIdCommande();
     }
 }

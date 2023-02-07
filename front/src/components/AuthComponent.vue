@@ -2,6 +2,10 @@
     <input type="email" v-model="this.email" placeholder="email">
     <input type="password" v-model="this.password" placeholder="password">
     <button type="button" v-on:click="login">connecter</button>
+    <select v-model="type">
+      <option value="client" selected>client</option>
+      <option value="marchand">marchand</option>
+    </select>
     <button type="button" v-on:click="register">s'enregistrer</button>
 
     <span class="error">{{ error }}</span>
@@ -17,13 +21,14 @@ export default {
   data: () => ({
     email: "",
     password: "",
+    type: "client",
     error: ""
   }),
 
   methods: {
     async register() {
-      if(this.email.trim() !== "" && this.password.trim() !== "") {
-        ServiceUtilisateur.register(this.email, this.password)
+      if(this.email.trim() !== "" && this.password.trim() !== "" && this.type !== "") {
+        ServiceUtilisateur.register(this.email, this.password, this.type)
             .then(async (response) => {
               const result = await response.json();
               if(response.status === 200) {

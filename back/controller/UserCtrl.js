@@ -3,6 +3,7 @@ import argon2 from "argon2";
 import {UserServices} from "../services/UserServices.js";
 import jwt from "jsonwebtoken";
 import {HubServices} from "../services/HubServices.js";
+import {RolesServices} from "../services/RolesServices.js";
 
 export const UserCtrl = {
     generateJWT: (userId) => {
@@ -18,7 +19,8 @@ export const UserCtrl = {
         try {
             const registerValidationSchema = new Joi.object({
                 email: Joi.string().email().required(),
-                password: Joi.string().min(6).required()
+                password: Joi.string().min(6).required(),
+                type: Joi.string().required()
             });
 
             const params = ctx.request.body;
@@ -29,9 +31,15 @@ export const UserCtrl = {
                 throw new Error("Email déja utilisé!");
             }
 
+            let idRole = await RolesServices.getIdByLibelle(params.type);
+
+            if(!idRole[0]["id"]) {
+                throw new Error("Une erreur d'origin inconnu est survenue");
+            }
+
             const hashPassword = await argon2.hash(params.password);
 
-            let id = await UserServices.register(params.email, hashPassword);
+            let id = await UserServices.register(params.email, hashPassword, idRole[0]["id"]);
 
             ctx.ok(UserCtrl.generateJWT(id));
         } catch (e) {
