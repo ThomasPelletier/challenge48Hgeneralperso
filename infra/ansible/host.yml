@@ -82,7 +82,7 @@
     - name: "[Install] Clean the local directory"
       become: true
       ansible.builtin.file:
-        path: ~/repo
+        path: /home/adminuser/repo
         state: absent
       tags:
         - temp
