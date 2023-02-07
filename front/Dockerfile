@@ -4,4 +4,4 @@ WORKDIR /app
 RUN npm i
 COPY . .
 EXPOSE 8080
-CMD ["npm", "run", "serve", "2>&1"]
+CMD ["npm", "run", "serve"]

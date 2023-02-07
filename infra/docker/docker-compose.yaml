@@ -13,10 +13,13 @@ services:
     container_name: back
     env_file:
       - /home/adminuser/repo/back/.env
+    links:
+      - mysql
 
   mysql:
     container_name: mysql
     image: mysql:8.0-debian
+    command: --default-authentication-plugin=mysql_native_password
     volumes:
       - ./mysql:/var/lib/mysql
     environment:
