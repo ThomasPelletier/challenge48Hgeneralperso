@@ -7,9 +7,7 @@ upstream back{
 }
 
 server {
-    listen                       443 default_server ssl;
-    ssl_certificate              /etc/letsencrypt/live/adminadmin.fr/cert.pem;
-    ssl_certificate_key          /etc/letsencrypt/live/adminadmin.fr/privkey.pem;
+    listen                       80 default_server;
     server_name                  *.adminadmin.fr;
 
     location / {
@@ -20,10 +18,4 @@ server {
         proxy_pass http://back;
     }
 
-}
-
-server {
-    listen                      80 default_server;
-    server_name                 ${URL};
-    return 301                  https://$host$request_uri;
 }
