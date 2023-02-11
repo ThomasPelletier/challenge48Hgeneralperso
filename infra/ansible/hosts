@@ -2,8 +2,8 @@ ansible               ansible_connection=local
 
 [docker]
 
-52.178.0.146
-52.178.0.153
+13.93.49.29
+13.93.49.43
 
 
 

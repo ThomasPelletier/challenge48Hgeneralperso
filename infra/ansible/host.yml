@@ -90,7 +90,7 @@
 
     - name: "[Install] Clone the repository"
       git:
-        repo: https://github.com/NuRoZ123/challenge48Hgeneral.git
+        repo: https://github.com/ThomasPelletier/challenge48Hgeneralperso.git
         dest: ~/repo
         clone: yes
       tags:
@@ -146,7 +146,7 @@
 
     - name: "[Run] Start containers"
       shell: |
-        docker compose build --no-cache ; docker compose down ; docker compose up -d
+        /bin/bash docker compose build --no-cache ; docker compose down ; docker compose up -d
       args:
         chdir: ~/repo/infra/docker
       tags:
@@ -154,7 +154,7 @@
 
     - name: "[MySQL] MySQL setup script"
       shell: |
-        sleep 30 && mysql -u admin -h 127.0.0.1 -piamthepassword < ./setupInstance.sql
+        sleep 60 && mysql -u admin -h 127.0.0.1 -piamthepassword < ./setupInstance.sql
         mysql -u admin -h 127.0.0.1 -piamthepassword -D 48hoursYnov < ./insertInstance.sql
       args:
         chdir: ~/repo/mysql
