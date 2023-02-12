@@ -15,5 +15,5 @@ variable "subnet_address_space" {
 }
 
 variable "vm_size" {
-  default = "Standard_D2_v2"
+  default = "Standard_B1s"
 }
