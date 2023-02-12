@@ -140,17 +140,15 @@
         reboot_command: init 6
         boot_time_command: uptime
 
-
-
-    # - name: "[Run] Run certbot script"
-    #   shell: |
-    #     /bin/bash chmod +x ./certbot.sh && ./certbot.sh
-    #   args:
-    #     chdir: ~/repo/infra/docker
-    #   register: certbot
-    #   failed_when: certbot.rc == -1
-    #   tags:
-    #     - temp
+    - name: "[Run] Run certbot script"
+      shell: |
+        /bin/bash chmod +x ./certbot.sh && ./certbot.sh
+      args:
+        chdir: ~/repo/infra/docker
+      register: certbot
+      failed_when: certbot.rc == -1
+      tags:
+        - temp
 
     - name: "[Run] Start containers"
       shell: |
