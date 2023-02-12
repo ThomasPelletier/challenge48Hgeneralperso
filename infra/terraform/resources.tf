@@ -131,7 +131,7 @@ resource "null_resource" "create-database-script" {
   }
 
   provisioner "local-exec" {
-    command     = "mysql -u ${azurerm_mysql_flexible_server.hub.administrator_login} -h ${azurerm_mysql_flexible_server.hub.fqdn} -p'${azurerm_mysql_flexible_server.hub.administrator_password}' < ../../mysql/setupHub.sql"
+    command     = "sleep 120 && mysql -u ${azurerm_mysql_flexible_server.hub.administrator_login} -h ${azurerm_mysql_flexible_server.hub.fqdn} -p'${azurerm_mysql_flexible_server.hub.administrator_password}' < ../../mysql/setupHub.sql"
   }
 
 }
@@ -210,7 +210,7 @@ resource "azurerm_linux_virtual_machine" "instance1" {
       type        = "ssh"
       user        = "adminuser"
       private_key = file("../id_rsa")
-      host        = "${azurerm_public_ip.publicip_instance2.ip_address}"
+      host        = "${azurerm_public_ip.publicip_instance1.ip_address}"
     }
 
   }
@@ -250,7 +250,7 @@ resource "azurerm_linux_virtual_machine" "instance2" {
       type        = "ssh"
       user        = "adminuser"
       private_key = file("../id_rsa")
-      host        = "${azurerm_public_ip.publicip_instance1.ip_address}"
+      host        = "${azurerm_public_ip.publicip_instance2.ip_address}"
     }
 
   }
