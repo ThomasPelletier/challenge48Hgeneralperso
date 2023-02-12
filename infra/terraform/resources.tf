@@ -205,6 +205,14 @@ resource "azurerm_linux_virtual_machine" "instance1" {
       "touch /home/adminuser/URL",
       "echo 'instance1.randoom.fr' > /home/adminuser/URL",
     ]
+
+    connection {
+      type        = "ssh"
+      user        = "adminuser"
+      private_key = file("../id_rsa")
+      host        = "${azurerm_public_ip.publicip_instance2.ip_address}"
+    }
+
   }
 
 }
@@ -237,6 +245,14 @@ resource "azurerm_linux_virtual_machine" "instance2" {
       "touch /home/adminuser/URL",
       "echo 'instance2.randoom.fr' > /home/adminuser/URL",
     ]
+
+    connection {
+      type        = "ssh"
+      user        = "adminuser"
+      private_key = file("../id_rsa")
+      host        = "${azurerm_public_ip.publicip_instance1.ip_address}"
+    }
+
   }
 
 }
