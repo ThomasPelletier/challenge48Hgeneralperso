@@ -199,6 +199,14 @@ resource "azurerm_linux_virtual_machine" "instance1" {
     username = "adminuser"
     public_key = file("../id_rsa.pub")
   }
+
+  provisioner "remote-exec" {
+    inline = [
+      "touch /home/adminuser/URL",
+      "echo 'instance1.randoom.fr > /home/adminuser/URL",
+    ]
+  }
+
 }
 
 resource "azurerm_linux_virtual_machine" "instance2" {
@@ -223,6 +231,14 @@ resource "azurerm_linux_virtual_machine" "instance2" {
     username = "adminuser"
     public_key = file("../id_rsa.pub")
   }
+
+  provisioner "remote-exec" {
+    inline = [
+      "touch /home/adminuser/URL",
+      "echo 'instance2.randoom.fr > /home/adminuser/URL",
+    ]
+  }
+
 }
 
 #----------------------------------------------------------------------------------#
