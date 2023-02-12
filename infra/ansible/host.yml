@@ -134,7 +134,7 @@
       tags:
         - temp
 
-    - name: Unconditionally reboot the machine with all defaults
+    - name: "[Run] Reboot"
       become: true
       ansible.builtin.reboot:
         reboot_command: init 6
