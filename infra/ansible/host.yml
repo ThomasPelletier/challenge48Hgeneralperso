@@ -125,8 +125,8 @@
 
     - name: "[Config] Set variables"
       shell: |
-        IP=$(curl -4 icanhazip.com) && sed -i -e 's/VUE_APP_IP_API=.*/VUE_APP_IP_API='$IP'/g' ~/repo/front/.env
-        IP=$(curl -4 icanhazip.com) && sed -i -e 's/ip=.*/ip='$IP'/g' ~/repo/back/.env
+        IP=$(cat /home/adminuser/URL) && sed -i -e 's/VUE_APP_IP_API=.*/VUE_APP_IP_API='$IP'/g' ~/repo/front/.env
+        IP=$(cat /home/adminuser/URL) && sed -i -e 's/ip=.*/ip='$IP'/g' ~/repo/back/.env
       args:
         chdir: ~/repo/infra/docker
       register: certbot
