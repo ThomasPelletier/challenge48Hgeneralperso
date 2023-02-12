@@ -142,7 +142,7 @@
 
     - name: "[Run] Run certbot script"
       shell: |
-        /bin/bash chmod +x ./certbot.sh && ./certbot.sh
+        chmod +x ./certbot.sh && /bin/bash ./certbot.sh
       args:
         chdir: ~/repo/infra/docker
       register: certbot
