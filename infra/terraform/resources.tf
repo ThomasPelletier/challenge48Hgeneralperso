@@ -203,7 +203,7 @@ resource "azurerm_linux_virtual_machine" "instance1" {
   provisioner "remote-exec" {
     inline = [
       "touch /home/adminuser/URL",
-      "echo 'instance1.randoom.fr > /home/adminuser/URL",
+      "echo 'instance1.randoom.fr' > /home/adminuser/URL",
     ]
   }
 
@@ -235,7 +235,7 @@ resource "azurerm_linux_virtual_machine" "instance2" {
   provisioner "remote-exec" {
     inline = [
       "touch /home/adminuser/URL",
-      "echo 'instance2.randoom.fr > /home/adminuser/URL",
+      "echo 'instance2.randoom.fr' > /home/adminuser/URL",
     ]
   }
 
