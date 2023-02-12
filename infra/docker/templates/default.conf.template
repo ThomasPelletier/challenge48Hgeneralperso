@@ -15,10 +15,12 @@ server {
 
     location / {
         proxy_pass http://front;
+        add_header "Access-Control-Allow-Origin" *;
     }
 
     location /api {
         proxy_pass http://back;
+        add_header "Access-Control-Allow-Origin" *;
     }
 
 }
