@@ -230,7 +230,7 @@ resource "azurerm_linux_virtual_machine" "instance2" {
 #----------------------------------------------------------------------------------#
 
 resource "ovh_domain_zone_record" "instance1" {
-  zone      = "adminadmin.fr"
+  zone      = "randoom.fr"
   subdomain = "instance1"
   fieldtype = "A"
   ttl       = "60"
@@ -238,7 +238,7 @@ resource "ovh_domain_zone_record" "instance1" {
 }
 
 resource "ovh_domain_zone_record" "instance2" {
-  zone      = "adminadmin.fr"
+  zone      = "randoom.fr"
   subdomain = "instance2"
   fieldtype = "A"
   ttl       = "60"
