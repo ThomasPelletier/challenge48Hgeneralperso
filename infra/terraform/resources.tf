@@ -203,7 +203,7 @@ resource "azurerm_linux_virtual_machine" "instance1" {
   provisioner "remote-exec" {
     inline = [
       "touch /home/adminuser/URL",
-      "echo 'instance1.randoom.fr' > /home/adminuser/URL",
+      "echo 'instance1.adminadmin.fr' > /home/adminuser/URL",
     ]
 
     connection {
@@ -243,7 +243,7 @@ resource "azurerm_linux_virtual_machine" "instance2" {
   provisioner "remote-exec" {
     inline = [
       "touch /home/adminuser/URL",
-      "echo 'instance2.randoom.fr' > /home/adminuser/URL",
+      "echo 'instance2.adminadmin.fr' > /home/adminuser/URL",
     ]
 
     connection {
@@ -262,7 +262,7 @@ resource "azurerm_linux_virtual_machine" "instance2" {
 #----------------------------------------------------------------------------------#
 
 resource "ovh_domain_zone_record" "instance1" {
-  zone      = "randoom.fr"
+  zone      = "adminadmin.fr"
   subdomain = "instance1"
   fieldtype = "A"
   ttl       = "60"
@@ -270,7 +270,7 @@ resource "ovh_domain_zone_record" "instance1" {
 }
 
 resource "ovh_domain_zone_record" "instance2" {
-  zone      = "randoom.fr"
+  zone      = "adminadmin.fr"
   subdomain = "instance2"
   fieldtype = "A"
   ttl       = "60"

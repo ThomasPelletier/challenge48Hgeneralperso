@@ -8,9 +8,9 @@ upstream back{
 
 server {
     listen                       443 default_server ssl;
-    ssl_certificate              /etc/letsencrypt/live/randoom.fr/cert.pem;
-    ssl_certificate_key          /etc/letsencrypt/live/randoom.fr/privkey.pem;
-    server_name                  *.randoom.fr;
+    ssl_certificate              /etc/letsencrypt/live/adminadmin.fr/cert.pem;
+    ssl_certificate_key          /etc/letsencrypt/live/adminadmin.fr/privkey.pem;
+    server_name                  *.adminadmin.fr;
 
     location / {
         proxy_pass http://front;
